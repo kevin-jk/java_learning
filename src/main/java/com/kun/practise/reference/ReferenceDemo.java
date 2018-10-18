@@ -31,6 +31,7 @@ public class ReferenceDemo {
         }
     }
 
+    // 此方法一直会运行
     public static void withWeakReference() {
         try {
             while (true) {
@@ -48,6 +49,11 @@ public class ReferenceDemo {
         System.out.println(cnt);
     }
 
+    /**
+     * 没有明白为何这个
+     *
+     * 抛出了异常  在内存不足的时候，为啥没有被回收？
+     * */
     public static void withWeakReferenceQueue() {
         try {
             List<Object> tempContainer = new ArrayList<Object>();
