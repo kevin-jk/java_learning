@@ -1,11 +1,20 @@
 package com.kun.practise.reference;
 
+import java.lang.ref.PhantomReference;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.WeakHashMap;
 
 /**
  * Created by jrjiakun on 2018/10/18
+ *
+ * WeakReference: 当内存空间不足的时候，JVM会GC掉指向的对象
+ *
+ * SoftReference: 每次GC的时候，都会回收掉对象
+ *
+ * PhantomReference: 虚引用， 无法通过虚引用访问对象的任何属性或者函数。（可以用来做一些监控） 其get方法总是返回一null, 其意义在于说明一个对象
+ * 已经进入finalization阶段，可以被gc回收。用来实现比finalization机制更灵活的回收操作。
  */
 public class ReferenceDemo {
     private static final int size = 1024 * 1024;
@@ -15,7 +24,8 @@ public class ReferenceDemo {
     public static void main(String[] arsg) {
 //     withNoWeakReference();
        // withWeakReference();
-        withWeakReferenceQueue();
+        //withWeakReferenceQueue();
+        weakHashMap();
     }
 
     // 显然，在运行程序不久之后，就会抛出异常。
@@ -71,6 +81,25 @@ public class ReferenceDemo {
 
         } catch (Throwable e) {
             System.out.println("exception"+cnt+e);
+        }
+        System.out.println(cnt);
+    }
+
+    //将一对key, value放入到 WeakHashMap 里并不能避免该key值被GC回收，除非在 WeakHashMap 之外还有对该key的强引用
+    private static void weakHashMap(){
+        WeakHashMap<Integer,Object> weakHashMap = new WeakHashMap<Integer, Object>();
+        try{
+            while (true){
+                byte[]a = new byte[size];
+                weakHashMap.put(cnt,a);
+                cnt++;
+                if(cnt>1000){
+                    break;
+                }
+
+            }
+        }catch (Throwable e){
+            System.out.println("error");
         }
         System.out.println(cnt);
     }
