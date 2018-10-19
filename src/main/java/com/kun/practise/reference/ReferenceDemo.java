@@ -1,6 +1,6 @@
 package com.kun.practise.reference;
 
-import java.lang.ref.PhantomReference;
+import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,7 @@ import java.util.WeakHashMap;
  *
  * PhantomReference: 虚引用， 无法通过虚引用访问对象的任何属性或者函数。（可以用来做一些监控） 其get方法总是返回一null, 其意义在于说明一个对象
  * 已经进入finalization阶段，可以被gc回收。用来实现比finalization机制更灵活的回收操作。
+ *
  */
 public class ReferenceDemo {
     private static final int size = 1024 * 1024;
@@ -25,7 +26,8 @@ public class ReferenceDemo {
 //     withNoWeakReference();
        // withWeakReference();
         //withWeakReferenceQueue();
-        weakHashMap();
+        //weakHashMap();
+        withWeakReferenceAndQueue();
     }
 
     // 显然，在运行程序不久之后，就会抛出异常。
@@ -63,6 +65,7 @@ public class ReferenceDemo {
      * 没有明白为何这个
      *
      * 抛出了异常  在内存不足的时候，为啥没有被回收？
+     *
      * */
     public static void withWeakReferenceQueue() {
         try {
@@ -100,6 +103,36 @@ public class ReferenceDemo {
             }
         }catch (Throwable e){
             System.out.println("error");
+        }
+        System.out.println(cnt);
+    }
+
+    public static void withWeakReferenceAndQueue() {
+        final ReferenceQueue<byte[]> referenceQueue = new ReferenceQueue<byte[]>();
+        try {
+            new Thread(()->{
+                try{
+                    if(referenceQueue.remove()!=null){
+                        System.out.println("Thread 监听到对象被回收");
+                    }
+                }catch (Exception e){
+
+                }
+            }).start();
+
+            while (true) {
+
+                byte[] bytes = new byte[size];
+                // 用referenceQueue监听被gc的对象
+                WeakReference<byte[]> weakReference = new WeakReference<byte[]>(bytes,referenceQueue);
+                container.add(weakReference);
+                cnt++;
+                if (cnt > 1000) {
+                    break;
+                }
+            }
+        } catch (Throwable e) {
+            System.out.println(cnt);
         }
         System.out.println(cnt);
     }
