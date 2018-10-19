@@ -1,5 +1,6 @@
 package com.kun.practise.reference;
 
+import java.lang.ref.PhantomReference;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class ReferenceDemo {
         //withWeakReferenceQueue();
         //weakHashMap();
         withWeakReferenceAndQueue();
+
     }
 
     // 显然，在运行程序不久之后，就会抛出异常。
