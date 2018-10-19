@@ -10,7 +10,8 @@ java_learning是本人在学习工作中，对java知识点的学习使用demo�
     *  WeakReference 
     *  SoftReference
     *  PhantomReference
-
+* Java Proxy[@java动态代理](http://note.youdao.com/noteshare?id=77a2a90627e2bbce32c6275d53ab5d25&sub=0F17E1F5FD5F4DF4B6D19D808E1723F2)
+* Java String[@java String,StringBuilder,StringBuffer](http://note.youdao.com/noteshare?id=24f989c18b7ac4a3dc0be5bcbef8571f&sub=C23835430BB742D198CAA237E362A6D8)
 
 ##学习交流方式
 
