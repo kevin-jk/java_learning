@@ -46,18 +46,27 @@ package com.kun.practise.string;
  [B]在频繁进行字符串的运算（如拼接、替换、删除等），并且运行在多线程环境下，建议使用StringBuffer，例如XML解析、HTTP参数解析与封装。
 
  [C]在频繁进行字符串的运算（如拼接、替换、删除等），并且运行在单线程环境下，建议使用StringBuilder，例如SQL语句拼装、JSON封装等。
+
  */
 public class StringKnowledge {
    public static void main(String[]a){
+       /**
+        * 需要注意的是，下面的结果和jdk版本有关系
+        * 在jdk7中，字符串常量池在堆中分配。如果堆中有了对象，就不需要重新复制一份到常量池中。
+        * @link https://tech.meituan.com/in_depth_understanding_string_intern.html
+        * */
        String s1 = new String("do");
        s1.intern();
        String s2 = "do";
 
        System.out.println(s1 == s2);//false
 
+       // + 操作，最终是是用StringBuilder进行append, 最后toStirng的时候，是new出来的，这个时候是在堆中分配内存。
        String s3 = new String("12") + new String("34");
        s3.intern();
        String s4 = "1234";
        System.out.println(s3 == s4);//true
+       String s5 ="1234";
+       System.out.println(s4==s5);
    }
 }
