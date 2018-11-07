@@ -8,4 +8,15 @@ package com.kun.practise.generics;
  如果既要存又要取，那么就不要使用任何通配符。
  */
 public class Spring extends Season {
+
+    public static void main(String[]args){
+        for(int i=0;i<20;i++){
+            System.out.println(mod(i,4));
+        }
+    }
+
+
+    private static int mod(int hash,int n){
+        return (n-1) & hash ;
+    }
 }

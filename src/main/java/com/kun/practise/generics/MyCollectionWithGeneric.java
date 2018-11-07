@@ -1,6 +1,5 @@
 package com.kun.practise.generics;
 
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
