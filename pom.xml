@@ -9,6 +9,24 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
+        <!--代码微基准测试的工具套件-->
+        <!--
+          1. 想准确的知道某个方法需要执行多长时间，以及执行时间和输入之间的相关性
+           2. 对比接口不同实现在给定条件下的吞吐量
+            3. 查看多少百分比的请求在多长时间内完成；
+
+        -->
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>1.21</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>1.21</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
