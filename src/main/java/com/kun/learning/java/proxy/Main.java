@@ -19,15 +19,16 @@ public class Main {
 
         String name = userService.getInfoById();
         System.out.println("Thread:"+Thread.currentThread().getName()+",name:"+name);
-        UserServiceProxy1 userServiceProxy1=    new UserServiceProxy1(userService);
-        IUserService userService1 = (IUserService) userServiceProxy1.getInstance();
-        userServiceProxy1.setProxy(userService1);
+       // UserServiceProxy1 userServiceProxy1=    new UserServiceProxy1(userService);
+//        IUserService userService1 = (IUserService) userServiceProxy1.getInstance();
+
+        UserServiceCglibProxy userServiceProxy1 = new UserServiceCglibProxy();
+        IUserService proxy = (IUserService)  userServiceProxy1.getProxy(UserService.class);
+
+
         System.out.println("Real class："+userService.getClass().getName());
-        System.out.println("Proxy class:"+userService1.getClass().getName());
-        System.out.println(userService instanceof  IUserService);
-        System.out.println(userService1 instanceof  IUserService);
-        System.out.println(userService instanceof Proxy);
-        System.out.println(userService1 instanceof  Proxy);
-        System.out.println("Thread:"+Thread.currentThread().getName()+",name:"+userService1.getNameById());
+        System.out.println("Proxy class:"+proxy.getClass().getName());
+
+        System.out.println("Thread:"+Thread.currentThread().getName()+",name:"+proxy.getNameById());
     }
 }

@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
  *
  *   `@Threads `    每个进程中的测试线程，可用于类或者方法上。一般选择为cpu乘以2。如果配置了 Threads.MAX ，代表使用 Runtime.getRuntime().availableProcessors() 个线程
  *
- *  `@Fork`  进行 fork 的次数。可用于类或者方法上。
+ *  `@Fork`  进行 fork 的次数。可用于类或者方法上  Fork出java虚拟机个数。
  *  `@Benchmark`   方法级注解，表示该方法是需要进行 benchmark 的对象，用法和 JUnit 的 @Test 类似
  *
  *  `@State`   State 用于声明某个类是一个“状态”，然后接受一个 Scope 参数用来表示该状态的共享范围。
